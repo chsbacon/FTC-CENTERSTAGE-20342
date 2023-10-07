@@ -1,8 +1,5 @@
 package org.firstinspires.ftc.teamcode.hardware;
 
-import android.util.Size;
-
-
 import androidx.annotation.NonNull;
 
 import com.acmerobotics.dashboard.canvas.Canvas;
@@ -36,58 +33,22 @@ import com.qualcomm.hardware.lynx.LynxModule;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 
-
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.vision.VisionPortal;
-import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
-import org.opencv.core.Core;
-import org.opencv.core.Mat;
-import org.opencv.core.Point;
-import org.opencv.core.Rect;
-import org.opencv.core.Scalar;
-import org.opencv.imgproc.Imgproc;
-import org.openftc.easyopencv.OpenCvCamera;
-import org.openftc.easyopencv.OpenCvCameraFactory;
-import org.openftc.easyopencv.OpenCvCameraRotation;
-import org.openftc.easyopencv.OpenCvPipeline;
-
-import java.lang.Math;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.*;
-
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.teamcode.hardware.Localizer;
 
 import java.lang.Math;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-
 
 @Config
 public final class MecanumDrive {
     public static class Params {
         // drive model parameters
-
-        public double inPerTick = 0.023564;
-        public double lateralInPerTick = 0.023762;
-        public double trackWidthTicks = 873;
-
-        // feedforward parameters (in tick units)
-        public double kS = 0.960801;
-        public double kV = 0.00424555;
-        public double kA = 0.000009;
-
         public double inPerTick = 0;
         public double lateralInPerTick = 1;
         public double trackWidthTicks = 0;
@@ -96,7 +57,6 @@ public final class MecanumDrive {
         public double kS = 0;
         public double kV = 0;
         public double kA = 0;
-
 
         // path profile parameters (in inches)
         public double maxWheelVel = 50;
@@ -108,15 +68,6 @@ public final class MecanumDrive {
         public double maxAngAccel = Math.PI;
 
         // path controller gains
-
-        public double axialGain = 0.5;
-        public double lateralGain = 1.0;
-        public double headingGain = 5.0; // shared with turn
-
-        public double axialVelGain = 1.0;
-        public double lateralVelGain = 0.0;
-        public double headingVelGain = 0.5; // shared with turn
-
         public double axialGain = 0.0;
         public double lateralGain = 0.0;
         public double headingGain = 0.0; // shared with turn
@@ -124,7 +75,6 @@ public final class MecanumDrive {
         public double axialVelGain = 0.0;
         public double lateralVelGain = 0.0;
         public double headingVelGain = 0.0; // shared with turn
-
     }
 
     public static Params PARAMS = new Params();
@@ -150,19 +100,8 @@ public final class MecanumDrive {
 
     public final IMU imu;
 
-
-    public final AprilTagProcessor tagProcessor;
-
-    public final VisionPortal visionPortal;
-
-    public final Localizer localizer;
-
-    public final ArrayList<String> ids = new ArrayList<String>();
-    public Pose2d pose;
-
     public final Localizer localizer;
     public Pose2d pose;
-
 
     private final LinkedList<Pose2d> poseHistory = new LinkedList<>();
 
@@ -177,10 +116,6 @@ public final class MecanumDrive {
             leftRear = new OverflowEncoder(new RawEncoder(MecanumDrive.this.leftBack));
             rightRear = new OverflowEncoder(new RawEncoder(MecanumDrive.this.rightBack));
             rightFront = new OverflowEncoder(new RawEncoder(MecanumDrive.this.rightFront));
-
-
-            leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
-            leftRear.setDirection(DcMotorSimple.Direction.REVERSE);
 
             lastLeftFrontPos = leftFront.getPositionAndVelocity().position;
             lastLeftRearPos = leftRear.getPositionAndVelocity().position;
@@ -247,26 +182,10 @@ public final class MecanumDrive {
         rightBack = hardwareMap.get(DcMotorEx.class, "rightBack");
         rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
 
-        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
-        leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
-
-
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-        tagProcessor = new AprilTagProcessor.Builder()
-                .setDrawAxes(true) //axes on center of AprilTag
-                .setDrawCubeProjection(true) //cube projected from tag
-                .setDrawTagID(true) //display tag number
-                .setDrawTagOutline(true) //border of tag
-                .build();
-        visionPortal = new VisionPortal.Builder()
-                .addProcessor(tagProcessor)
-                .setCamera(hardwareMap.get(WebcamName.class, "Webcam1"))
-                .setCameraResolution(new Size(640,480)) //set resolution
-                .build();
 
         imu = hardwareMap.get(IMU.class, "imu");
         IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
@@ -279,19 +198,6 @@ public final class MecanumDrive {
         localizer = new DriveLocalizer();
 
         FlightRecorder.write("MECANUM_PARAMS", PARAMS);
-
-        ids.add(null);
-        ids.add("BlueL");
-        ids.add("BlueC");
-        ids.add("BlueR");
-        ids.add("RedL");
-        ids.add("RedC");
-        ids.add("RedR");
-        ids.add("RedW");
-        ids.add("RedW");
-        ids.add("BlueW");
-        ids.add("BlueW");
-
     }
 
     public void setDrivePowers(PoseVelocity2d powers) {
