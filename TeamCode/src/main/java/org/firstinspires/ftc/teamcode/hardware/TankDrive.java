@@ -43,6 +43,9 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 
+import org.firstinspires.ftc.teamcode.Localizer;
+import org.firstinspires.ftc.teamcode.PoseMessage;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -200,7 +203,7 @@ public final class TankDrive {
 
         voltageSensor = hardwareMap.voltageSensor.iterator().next();
 
-        localizer = new TankDrive.DriveLocalizer();
+        localizer = new DriveLocalizer();
 
         FlightRecorder.write("TANK_PARAMS", PARAMS);
     }
