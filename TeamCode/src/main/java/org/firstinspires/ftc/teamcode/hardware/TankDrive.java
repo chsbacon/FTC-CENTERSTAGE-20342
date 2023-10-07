@@ -200,7 +200,11 @@ public final class TankDrive {
 
         voltageSensor = hardwareMap.voltageSensor.iterator().next();
 
+ 
         localizer = new TankDrive.DriveLocalizer();
+
+        localizer = new DriveLocalizer();
+ 
 
         FlightRecorder.write("TANK_PARAMS", PARAMS);
     }

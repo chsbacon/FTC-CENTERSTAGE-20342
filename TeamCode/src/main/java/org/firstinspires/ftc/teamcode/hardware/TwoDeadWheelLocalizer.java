@@ -8,6 +8,7 @@ import com.acmerobotics.roadrunner.Twist2dDual;
 import com.acmerobotics.roadrunner.Vector2dDual;
 import com.acmerobotics.roadrunner.ftc.Encoder;
 import com.acmerobotics.roadrunner.ftc.FlightRecorder;
+
 import com.acmerobotics.roadrunner.ftc.PositionVelocityPair;
 import com.acmerobotics.roadrunner.ftc.RawEncoder;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -19,9 +20,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 @Config
 public final class TwoDeadWheelLocalizer implements Localizer {
     public static class Params {
+
         public double PAR_Y_TICKS = 0.0;
         public double PERP_X_TICKS = 0.0;
-    }
+
 
     public static Params PARAMS = new Params();
 
@@ -33,9 +35,11 @@ public final class TwoDeadWheelLocalizer implements Localizer {
 
     private final double inPerTick;
 
+
     public TwoDeadWheelLocalizer(HardwareMap hardwareMap, IMU imu, double inPerTick) {
         par = new RawEncoder(hardwareMap.get(DcMotorEx.class, "par"));
         perp = new RawEncoder(hardwareMap.get(DcMotorEx.class, "perp"));
+
         this.imu = imu;
 
         lastParPos = par.getPositionAndVelocity().position;
@@ -46,6 +50,7 @@ public final class TwoDeadWheelLocalizer implements Localizer {
 
         FlightRecorder.write("TWO_DEAD_WHEEL_PARAMS", PARAMS);
     }
+
 
     public Twist2dDual<Time> update() {
         PositionVelocityPair parPosVel = par.getPositionAndVelocity();
@@ -58,6 +63,7 @@ public final class TwoDeadWheelLocalizer implements Localizer {
 
         double headingVel = imu.getRobotAngularVelocity(AngleUnit.RADIANS).zRotationRate;
 
+
         Twist2dDual<Time> twist = new Twist2dDual<>(
                 new Vector2dDual<>(
                         new DualNum<Time>(new double[] {
@@ -67,6 +73,7 @@ public final class TwoDeadWheelLocalizer implements Localizer {
                         new DualNum<Time>(new double[] {
                                 perpPosDelta - PARAMS.PERP_X_TICKS * headingDelta,
                                 perpPosVel.velocity - PARAMS.PERP_X_TICKS * headingVel,
+
                         }).times(inPerTick)
                 ),
                 new DualNum<>(new double[] {
