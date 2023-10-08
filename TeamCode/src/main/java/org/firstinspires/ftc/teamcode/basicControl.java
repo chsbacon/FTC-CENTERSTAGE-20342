@@ -50,13 +50,11 @@ public class basicControl extends LinearOpMode { //* Change name to your liking
 
     //* Robot goes forward 5 seconds
     public void runForward(){
-        while(runtime.seconds() <= 5 && opModeIsActive()){
+        while(gamepad1.dpad_up){
             robot.LTMotor.setPower(.1);
             robot.RTMotor.setPower(.1);
             robot.LBMotor.setPower(.1);
-            robot.RBMotor.setPower(-.1);
-            telemetry.addData("forward", runtime.seconds());
-            telemetry.update();
+            robot.RBMotor.setPower(.1);
         }
         robot.LTMotor.setPower(0);
         robot.RTMotor.setPower(0);
@@ -106,20 +104,17 @@ public class basicControl extends LinearOpMode { //* Change name to your liking
 
     }
     public void moveBackwards() {
-        resetRuntime();
-        while (runtime.seconds() <= 5 && opModeIsActive()) {
-            robot.LTMotor.setPower(-0.1);
-            robot.RTMotor.setPower(-0.1);
-            robot.LBMotor.setPower(-0.1);
-            robot.RBMotor.setPower(-0.1);
-            telemetry.addData("backwards", runtime.seconds());
-            telemetry.update();
+        while(gamepad1.dpad_down){
+            robot.LTMotor.setPower(-.1);
+            robot.RTMotor.setPower(-.1);
+            robot.LBMotor.setPower(-.1);
+            robot.RBMotor.setPower(-.1);
         }
         robot.LTMotor.setPower(0);
         robot.RTMotor.setPower(0);
         robot.LBMotor.setPower(0);
         robot.RBMotor.setPower(0);
-    }
+
 
 
 }
