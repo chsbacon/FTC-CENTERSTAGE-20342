@@ -49,6 +49,16 @@ public class basicControl extends LinearOpMode { //* Change name to your liking
                 telemetry.addData("turned forwardRight", runtime.seconds());
                 telemetry.update();
             }
+            if(gamepad1.left_bumper){
+                pivotLeft();
+                telemetry.addData("pivot Right", runtime.seconds());
+                telemetry.update();
+            }
+            if(gamepad1.right_bumper){
+                pivotRight();
+                telemetry.addData("pivot Left", runtime.seconds());
+                telemetry.update();
+            }
         }
     }
     //* Robot goes forward 5 seconds
@@ -133,5 +143,31 @@ public class basicControl extends LinearOpMode { //* Change name to your liking
         robot.LBMotor.setPower(0);
         robot.RBMotor.setPower(0);
 
+    }
+    public void pivotLeft(){
+        while(gamepad1.left_bumper){
+            robot.LTMotor.setPower(.9);
+            robot.RTMotor.setPower(.9);
+            robot.LBMotor.setPower(-.9);
+            robot.RBMotor.setPower(-.9);
+
+        }
+        robot.LTMotor.setPower(0);
+        robot.RTMotor.setPower(0);
+        robot.LBMotor.setPower(0);
+        robot.RBMotor.setPower(0);
+    }
+    public void pivotRight(){
+        while(gamepad1.right_bumper){
+            robot.LTMotor.setPower(-.9);
+            robot.RTMotor.setPower(-.9);
+            robot.LBMotor.setPower(.9);
+            robot.RBMotor.setPower(.9);
+
+        }
+        robot.LTMotor.setPower(0);
+        robot.RTMotor.setPower(0);
+        robot.LBMotor.setPower(0);
+        robot.RBMotor.setPower(0);
     }
 }
