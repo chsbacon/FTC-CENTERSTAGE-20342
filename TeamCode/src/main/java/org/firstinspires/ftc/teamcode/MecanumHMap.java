@@ -36,6 +36,9 @@ public class MecanumHMap
         LBMotor    = hwMap.get(DcMotor.class, "leftBack");
         RBMotor    = hwMap.get(DcMotor.class, "rightBack");
 
+        RBMotor.setDirection(DcMotor.Direction.REVERSE);
+        LTMotor.setDirection(DcMotor.Direction.REVERSE);
+        LBMotor.setDirection(DcMotor.Direction.REVERSE);
 
         // Set all motors to zero power
         LTMotor.setPower(0);
