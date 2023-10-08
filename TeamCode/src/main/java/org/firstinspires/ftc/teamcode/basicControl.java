@@ -44,6 +44,11 @@ public class basicControl extends LinearOpMode { //* Change name to your liking
                 telemetry.addData("turned forwardsLeft", runtime.seconds());
                 telemetry.update();
             }
+            if(gamepad1.dpad_up&&gamepad1.dpad_right){
+                moveForwardRight();
+                telemetry.addData("turned forwardRight", runtime.seconds());
+                telemetry.update();
+            }
         }
     }
     //* Robot goes forward 5 seconds
@@ -105,6 +110,23 @@ public class basicControl extends LinearOpMode { //* Change name to your liking
             robot.RTMotor.setPower(.9);
             robot.LBMotor.setPower(-.9);
             robot.RBMotor.setPower(.9);
+        }
+        robot.LTMotor.setPower(0);
+        robot.RTMotor.setPower(0);
+        robot.LBMotor.setPower(0);
+        robot.RBMotor.setPower(0);
+
+    }
+    public void moveForwardRight() {
+        while(gamepad1.dpad_left&&gamepad1.dpad_up){
+            robot.LTMotor.setPower(.9);
+            robot.RTMotor.setPower(.9);
+            robot.LBMotor.setPower(.9);
+            robot.RBMotor.setPower(.9);
+            robot.LTMotor.setPower(.9);
+            robot.RTMotor.setPower(-.9);
+            robot.LBMotor.setPower(.9);
+            robot.RBMotor.setPower(-.9);
         }
         robot.LTMotor.setPower(0);
         robot.RTMotor.setPower(0);
