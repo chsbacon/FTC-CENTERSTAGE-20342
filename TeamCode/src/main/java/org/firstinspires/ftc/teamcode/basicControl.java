@@ -52,10 +52,10 @@ public class basicControl extends LinearOpMode { //* Change name to your liking
     //* Robot goes forward 5 seconds
     public void runForward(){
         while(runtime.seconds() <= 5 && opModeIsActive()){
-            robot.LTMotor.setPower(.5);
-            robot.RTMotor.setPower(.5);
-            robot.LBMotor.setPower(.5);
-            robot.RBMotor.setPower(-.5);
+            robot.LTMotor.setPower(.1);
+            robot.RTMotor.setPower(.1);
+            robot.LBMotor.setPower(.1);
+            robot.RBMotor.setPower(-.1);
             telemetry.addData("forward", runtime.seconds());
             telemetry.update();
         }
@@ -86,10 +86,10 @@ public class basicControl extends LinearOpMode { //* Change name to your liking
     public void turnRight(){
         resetRuntime();
         while(runtime.seconds() <= 5 && opModeIsActive()){
-            robot.LTMotor.setPower(-.5);
-            robot.RTMotor.setPower(.5);
-            robot.LBMotor.setPower(-.5);
-            robot.RBMotor.setPower(.5);
+            robot.LTMotor.setPower(-.1);
+            robot.RTMotor.setPower(.1);
+            robot.LBMotor.setPower(-.1);
+            robot.RBMotor.setPower(.1);
             telemetry.addData("forward", runtime.seconds());
             telemetry.update();
 
@@ -113,10 +113,10 @@ public class basicControl extends LinearOpMode { //* Change name to your liking
     public void turn180(){
         resetRuntime();
         while(runtime.seconds() <= 10 && opModeIsActive()){
-            robot.LTMotor.setPower(.5);
-            robot.RTMotor.setPower(-.5);
-            robot.LBMotor.setPower(.5);
-            robot.RBMotor.setPower(-.5);
+            robot.LTMotor.setPower(.1);
+            robot.RTMotor.setPower(-.1);
+            robot.LBMotor.setPower(.1);
+            robot.RBMotor.setPower(-.1);
             telemetry.addData("forward", runtime.seconds());
             telemetry.update();
 
@@ -130,10 +130,10 @@ public class basicControl extends LinearOpMode { //* Change name to your liking
     public void moveBackwards() {
         resetRuntime();
         while (runtime.seconds() <= 5 && opModeIsActive()) {
-            robot.LTMotor.setPower(-0.5);
-            robot.RTMotor.setPower(-0.5);
-            robot.LBMotor.setPower(-0.5);
-            robot.RBMotor.setPower(-0.5);
+            robot.LTMotor.setPower(-0.1);
+            robot.RTMotor.setPower(-0.1);
+            robot.LBMotor.setPower(-0.1);
+            robot.RBMotor.setPower(-0.1);
             telemetry.addData("forward", runtime.seconds());
             telemetry.update();
         }
