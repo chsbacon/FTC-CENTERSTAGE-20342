@@ -26,14 +26,13 @@ public class basicControl extends LinearOpMode { //* Change name to your liking
         waitForB_Button();
         telemetry.addData("B", runtime.seconds());
         telemetry.update();
-        runForward();
-        telemetry.addData("moved forward", runtime.seconds());
+        //runForward();
+        //telemetry.addData("moved forward", runtime.seconds());
+        //telemetry.update();
+        turnLeft();
+        telemetry.addData("turned Left", runtime.seconds());
         telemetry.update();
-        //turnLeft();
         //turnRight();
-        //turnLeftAndMove();
-        //turnRightAndMove();
-        //turn180();
         //moveBackwards();
         //*Main code, runs after start button pressed
     }
@@ -43,7 +42,7 @@ public class basicControl extends LinearOpMode { //* Change name to your liking
     //Hint: "game pad1.b" returns true if "B" pressed, false if not
     public void waitForB_Button(){
         while(true){
-            if (gamepad1.b){
+            if (gamepad1.b) {
                 break;
             }
         }
@@ -67,15 +66,11 @@ public class basicControl extends LinearOpMode { //* Change name to your liking
 
     }
     public void turnLeft(){
-        resetRuntime();
-        while(runtime.seconds() <= 10 && opModeIsActive()){
-            robot.LTMotor.setPower(.1);
+        while(gamepad1.dpad_left){
+            robot.LTMotor.setPower(-.1);
             robot.RTMotor.setPower(.1);
-            robot.LBMotor.setPower(.1);
+            robot.LBMotor.setPower(-.1);
             robot.RBMotor.setPower(.1);
-            telemetry.addData("forward", runtime.seconds());
-            telemetry.update();
-
         }
         robot.LTMotor.setPower(0);
         robot.RTMotor.setPower(0);
@@ -84,15 +79,11 @@ public class basicControl extends LinearOpMode { //* Change name to your liking
 
     }
     public void turnRight(){
-        resetRuntime();
-        while(runtime.seconds() <= 5 && opModeIsActive()){
-            robot.LTMotor.setPower(-.1);
-            robot.RTMotor.setPower(.1);
-            robot.LBMotor.setPower(-.1);
-            robot.RBMotor.setPower(.1);
-            telemetry.addData("forward", runtime.seconds());
-            telemetry.update();
-
+        while(gamepad1.dpad_right){
+            robot.LTMotor.setPower(.1);
+            robot.RTMotor.setPower(-.1);
+            robot.LBMotor.setPower(.1);
+            robot.RBMotor.setPower(-.1);
         }
         robot.LTMotor.setPower(0);
         robot.RTMotor.setPower(0);
@@ -103,28 +94,15 @@ public class basicControl extends LinearOpMode { //* Change name to your liking
     public void turnLeftAndMove(){
         turnLeft();
         runForward();
+        telemetry.addData("turnLeft and move", runtime.seconds());
+        telemetry.update();
 
     }
     public void turnRightAndMove(){
         turnRight();
         runForward();
-
-    }
-    public void turn180(){
-        resetRuntime();
-        while(runtime.seconds() <= 10 && opModeIsActive()){
-            robot.LTMotor.setPower(.1);
-            robot.RTMotor.setPower(-.1);
-            robot.LBMotor.setPower(.1);
-            robot.RBMotor.setPower(-.1);
-            telemetry.addData("forward", runtime.seconds());
-            telemetry.update();
-
-        }
-        robot.LTMotor.setPower(0);
-        robot.RTMotor.setPower(0);
-        robot.LBMotor.setPower(0);
-        robot.RBMotor.setPower(0);
+        telemetry.addData("moving-right", runtime.seconds());
+        telemetry.update();
 
     }
     public void moveBackwards() {
@@ -134,7 +112,7 @@ public class basicControl extends LinearOpMode { //* Change name to your liking
             robot.RTMotor.setPower(-0.1);
             robot.LBMotor.setPower(-0.1);
             robot.RBMotor.setPower(-0.1);
-            telemetry.addData("forward", runtime.seconds());
+            telemetry.addData("backwards", runtime.seconds());
             telemetry.update();
         }
         robot.LTMotor.setPower(0);
