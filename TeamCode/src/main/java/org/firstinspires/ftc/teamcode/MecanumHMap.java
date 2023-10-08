@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -16,10 +15,6 @@ public class MecanumHMap
     public DcMotor  RTMotor     = null;
     public DcMotor  LBMotor    = null;
     public DcMotor  RBMotor      = null;
-    public DcMotor  armMotor      = null;
-
-    public RevBlinkinLedDriver blinkinLedDriver = null;
-    public RevBlinkinLedDriver.BlinkinPattern pattern;
 
     /* local OpMode members. */
     HardwareMap hwMap           =  null;
@@ -35,13 +30,11 @@ public class MecanumHMap
         //Reverse right motor
         // Save reference to Hardware map
         hwMap = ahwMap;
-        blinkinLedDriver = hwMap.get(RevBlinkinLedDriver.class, "blinkin");
         // Define and Initialize Motors
-        LTMotor    = hwMap.get(DcMotor.class, "LH");
-        RTMotor    = hwMap.get(DcMotor.class, "RH");
-        LBMotor    = hwMap.get(DcMotor.class, "FV");
-        RBMotor    = hwMap.get(DcMotor.class, "BV");
-        armMotor   = hwMap.get(DcMotor.class, "arm");
+        LTMotor    = hwMap.get(DcMotor.class, "LF");
+        RTMotor    = hwMap.get(DcMotor.class, "RF");
+        LBMotor    = hwMap.get(DcMotor.class, "LB");
+        RBMotor    = hwMap.get(DcMotor.class, "RB");
 
         LTMotor.setDirection(DcMotor.Direction.REVERSE);
         LBMotor.setDirection(DcMotor.Direction.REVERSE);
@@ -51,7 +44,6 @@ public class MecanumHMap
         RTMotor.setPower(0);
         LBMotor.setPower(0);
         RBMotor.setPower(0);
-        armMotor.setPower(0);
 
         //stop and reset?
         // Set motors to run with encoders.
@@ -59,13 +51,11 @@ public class MecanumHMap
         RTMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         LBMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         RBMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Set zero power behavior
         LTMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         RTMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         LBMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         RBMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 }
