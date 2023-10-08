@@ -21,7 +21,6 @@ public class HMap
 
     /* Initialize standard Hardware interfaces */
     public void init(HardwareMap ahwMap) {
-        //Reverse right motor
         // Save reference to Hardware map
         hwMap = ahwMap;
         // Define and Initialize Motors

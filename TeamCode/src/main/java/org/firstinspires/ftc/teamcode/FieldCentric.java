@@ -43,6 +43,7 @@ public class FieldCentric extends LinearOpMode {
             telemetry.addData("yaw", robotOrientation.getYaw(AngleUnit.DEGREES));
             telemetry.update();
             if (gamepad1.a) {
+                //reset yaw
                 robot.imu.resetYaw();
             }
             double rotX = x * Math.cos(botHeading) - y * Math.sin(botHeading);
