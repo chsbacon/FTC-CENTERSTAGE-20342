@@ -65,9 +65,9 @@ public class basicControl extends LinearOpMode { //* Change name to your liking
     }
     public void turnLeft(){
         while(gamepad1.dpad_left){
-            robot.LTMotor.setPower(-.1);
+            robot.LTMotor.setPower(.1);
             robot.RTMotor.setPower(.1);
-            robot.LBMotor.setPower(-.1);
+            robot.LBMotor.setPower(.1);
             robot.RBMotor.setPower(.1);
         }
         robot.LTMotor.setPower(0);
@@ -104,7 +104,7 @@ public class basicControl extends LinearOpMode { //* Change name to your liking
 
     }
     public void moveBackwards() {
-        while(gamepad1.dpad_down){
+        while (gamepad1.dpad_down) {
             robot.LTMotor.setPower(-.1);
             robot.RTMotor.setPower(-.1);
             robot.LBMotor.setPower(-.1);
@@ -114,10 +114,12 @@ public class basicControl extends LinearOpMode { //* Change name to your liking
         robot.RTMotor.setPower(0);
         robot.LBMotor.setPower(0);
         robot.RBMotor.setPower(0);
-
-
-
+    }
 }
+
+
+
+
 
 
 
