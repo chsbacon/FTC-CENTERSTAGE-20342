@@ -31,13 +31,11 @@ public class MecanumHMap
         // Save reference to Hardware map
         hwMap = ahwMap;
         // Define and Initialize Motors
-        LTMotor    = hwMap.get(DcMotor.class, "LF");
-        RTMotor    = hwMap.get(DcMotor.class, "RF");
-        LBMotor    = hwMap.get(DcMotor.class, "LB");
-        RBMotor    = hwMap.get(DcMotor.class, "RB");
+        LTMotor    = hwMap.get(DcMotor.class, "leftFront");
+        RTMotor    = hwMap.get(DcMotor.class, "rightFront");
+        LBMotor    = hwMap.get(DcMotor.class, "leftBack");
+        RBMotor    = hwMap.get(DcMotor.class, "rightBack");
 
-        RTMotor.setDirection(DcMotor.Direction.REVERSE);
-        RBMotor.setDirection(DcMotor.Direction.REVERSE);
 
         // Set all motors to zero power
         LTMotor.setPower(0);

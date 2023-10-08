@@ -17,27 +17,36 @@ public class basicControl extends LinearOpMode { //* Change name to your liking
         waitForStart();
         telemetry.addData("start", runtime.seconds());
         telemetry.update();
-        waitForB_Button();
-        telemetry.addData("B", runtime.seconds());
-        telemetry.update();
-        //runForward();
-        //telemetry.addData("moved forward", runtime.seconds());
+        while(opModeIsActive()) {
+            if (gamepad1.dpad_up) {
+                runForward();
+                telemetry.addData("moved forward", runtime.seconds());
+                telemetry.update();
+            }
+            if (gamepad1.dpad_left) {
+                turnLeft();
+                telemetry.addData("turned Left", runtime.seconds());
+                telemetry.update();
+            }
+            if (gamepad1.dpad_right) {
+                turnRight();
+                telemetry.addData("turned right", runtime.seconds());
+                telemetry.update();
+            }
+            if (gamepad1.dpad_down) {
+                moveBackwards();
+                telemetry.addData("turned backwards", runtime.seconds());
+                telemetry.update();
+
+            }
+        }
+        //waitForB_Button();
+        //telemetry.addData("B", runtime.seconds());
         //telemetry.update();
-        turnLeft();
-        telemetry.addData("turned Left", runtime.seconds());
-        telemetry.update();
+
         //turnRight();
         //moveBackwards();
         //*Main code, runs after start button pressed
-    }
-    //* Waits for "B" button to be pressed
-    //Hint: "game pad1.b" returns true if "B" pressed, false if not
-    public void waitForB_Button(){
-        while(true){
-            if (gamepad1.b) {
-                break;
-            }
-        }
     }
     //* Robot goes forward 5 seconds
     public void runForward(){
@@ -54,10 +63,10 @@ public class basicControl extends LinearOpMode { //* Change name to your liking
     }
     public void turnLeft(){
         while(gamepad1.dpad_left){
-            robot.LTMotor.setPower(.1);
+            robot.LTMotor.setPower(-.1);
             robot.RTMotor.setPower(.1);
-            robot.LBMotor.setPower(.1);
-            robot.RBMotor.setPower(-.1);
+            robot.LBMotor.setPower(-.1);
+            robot.RBMotor.setPower(.1);
         }
         robot.LTMotor.setPower(0);
         robot.RTMotor.setPower(0);
