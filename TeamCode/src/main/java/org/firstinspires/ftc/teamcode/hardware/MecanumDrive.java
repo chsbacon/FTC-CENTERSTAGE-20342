@@ -49,13 +49,13 @@ import java.util.List;
 public final class MecanumDrive {
     public static class Params {
         // drive model parameters
-        public double inPerTick = 0;
-        public double lateralInPerTick = 1;
-        public double trackWidthTicks = 0;
+        public double inPerTick = 2023/47;
+        public double lateralInPerTick = 1628/36;
+        public double trackWidthTicks = 916.6418935229276;
 
         // feedforward parameters (in tick units)
-        public double kS = 0;
-        public double kV = 0;
+        public double kS = 0.7006843798364581;
+        public double kV = 0.0042965152604539135;
         public double kA = 0;
 
         // path profile parameters (in inches)
@@ -116,6 +116,11 @@ public final class MecanumDrive {
             leftRear = new OverflowEncoder(new RawEncoder(MecanumDrive.this.leftBack));
             rightRear = new OverflowEncoder(new RawEncoder(MecanumDrive.this.rightBack));
             rightFront = new OverflowEncoder(new RawEncoder(MecanumDrive.this.rightFront));
+
+
+            leftFront.setDirection(DcMotorEx.Direction.REVERSE);
+            leftRear.setDirection(DcMotorEx.Direction.REVERSE);
+            rightRear.setDirection(DcMotorEx.Direction.REVERSE);
 
             lastLeftFrontPos = leftFront.getPositionAndVelocity().position;
             lastLeftRearPos = leftRear.getPositionAndVelocity().position;
@@ -181,6 +186,8 @@ public final class MecanumDrive {
         leftBack = hardwareMap.get(DcMotorEx.class, "leftBack");
         rightBack = hardwareMap.get(DcMotorEx.class, "rightBack");
         rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
+
+
 
         leftFront.setDirection(DcMotor.Direction.REVERSE);
         leftBack.setDirection(DcMotor.Direction.REVERSE);
