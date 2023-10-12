@@ -18,36 +18,26 @@ public class basicControl extends LinearOpMode { //* Change name to your liking
         telemetry.addData("start", runtime.seconds());
         telemetry.update();
         while(opModeIsActive()) {
-            if (gamepad1.dpad_up) {
+            if (gamepad1.right_stick_y==50) {
                 runForward();
                 telemetry.addData("moved forward", runtime.seconds());
                 telemetry.update();
             }
-            if (gamepad1.dpad_left) {
+            if (gamepad1.right_stick_x==-50) {
                 turnLeft();
                 telemetry.addData("turned Left", runtime.seconds());
                 telemetry.update();
             }
-            if (gamepad1.dpad_right) {
+            if (gamepad1.right_stick_x==50) {
                 turnRight();
                 telemetry.addData("turned right", runtime.seconds());
                 telemetry.update();
             }
-            if (gamepad1.dpad_down) {
+            if (gamepad1.right_stick_y==-50) {
                 moveBackwards();
                 telemetry.addData("turned backwards", runtime.seconds());
                 telemetry.update();
 
-            }
-            if(gamepad1.dpad_up&&gamepad1.dpad_left){
-                moveForwardLeft();
-                telemetry.addData("turned forwardsLeft", runtime.seconds());
-                telemetry.update();
-            }
-            if(gamepad1.dpad_up&&gamepad1.dpad_right){
-                moveForwardRight();
-                telemetry.addData("turned forwardRight", runtime.seconds());
-                telemetry.update();
             }
             if(gamepad1.left_bumper){
                 pivotLeft();
@@ -63,7 +53,7 @@ public class basicControl extends LinearOpMode { //* Change name to your liking
     }
     //* Robot goes forward 5 seconds
     public void runForward(){
-        while(gamepad1.dpad_up){
+        while(gamepad1.right_stick_y==50){
             robot.LTMotor.setPower(.9);
             robot.RTMotor.setPower(.9);
             robot.LBMotor.setPower(.9);
@@ -75,7 +65,7 @@ public class basicControl extends LinearOpMode { //* Change name to your liking
         robot.RBMotor.setPower(0);
     }
     public void turnLeft(){
-        while(gamepad1.dpad_left){
+        while(gamepad1.right_stick_x==-50){
             robot.LTMotor.setPower(-.9);
             robot.RTMotor.setPower(.9);
             robot.LBMotor.setPower(-.9);
@@ -87,7 +77,7 @@ public class basicControl extends LinearOpMode { //* Change name to your liking
         robot.RBMotor.setPower(0);
     }
     public void turnRight(){
-        while(gamepad1.dpad_right){
+        while(gamepad1.right_stick_x==50){
             robot.LTMotor.setPower(.9);
             robot.RTMotor.setPower(-.9);
             robot.LBMotor.setPower(.9);
@@ -99,7 +89,7 @@ public class basicControl extends LinearOpMode { //* Change name to your liking
         robot.RBMotor.setPower(0);
     }
     public void moveBackwards() {
-        while (gamepad1.dpad_down) {
+        while (gamepad1.right_stick_y==50) {
             robot.LTMotor.setPower(-.9);
             robot.RTMotor.setPower(-.9);
             robot.LBMotor.setPower(-.9);
@@ -109,40 +99,6 @@ public class basicControl extends LinearOpMode { //* Change name to your liking
         robot.RTMotor.setPower(0);
         robot.LBMotor.setPower(0);
         robot.RBMotor.setPower(0);
-    }
-    public void moveForwardLeft() {
-        while(gamepad1.dpad_left&&gamepad1.dpad_up){
-            robot.LTMotor.setPower(.9);
-            robot.RTMotor.setPower(.9);
-            robot.LBMotor.setPower(.9);
-            robot.RBMotor.setPower(.9);
-            robot.LTMotor.setPower(-.9);
-            robot.RTMotor.setPower(.9);
-            robot.LBMotor.setPower(-.9);
-            robot.RBMotor.setPower(.9);
-        }
-        robot.LTMotor.setPower(0);
-        robot.RTMotor.setPower(0);
-        robot.LBMotor.setPower(0);
-        robot.RBMotor.setPower(0);
-
-    }
-    public void moveForwardRight() {
-        while(gamepad1.dpad_left&&gamepad1.dpad_up){
-            robot.LTMotor.setPower(.9);
-            robot.RTMotor.setPower(.9);
-            robot.LBMotor.setPower(.9);
-            robot.RBMotor.setPower(.9);
-            robot.LTMotor.setPower(.9);
-            robot.RTMotor.setPower(-.9);
-            robot.LBMotor.setPower(.9);
-            robot.RBMotor.setPower(-.9);
-        }
-        robot.LTMotor.setPower(0);
-        robot.RTMotor.setPower(0);
-        robot.LBMotor.setPower(0);
-        robot.RBMotor.setPower(0);
-
     }
     public void pivotLeft(){
         while(gamepad1.left_bumper){
