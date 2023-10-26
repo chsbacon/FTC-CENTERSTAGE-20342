@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 
-@TeleOp(name = "FieldCentric", group = "TeleOp")
+@TeleOp(name = "TurnPid", group = "TeleOp")
 public class TurnPid extends LinearOpMode {
     HMap robot = new HMap(); //hardware map object
     ElapsedTime runtime = new ElapsedTime();
