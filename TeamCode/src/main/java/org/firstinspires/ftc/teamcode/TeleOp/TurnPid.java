@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.TeleOp;
 
+import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -11,6 +13,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 public class TurnPid extends LinearOpMode {
     HMap robot = new HMap(); //hardware map object
     ElapsedTime runtime = new ElapsedTime();
+    FtcDashboard dashboard = FtcDashboard.getInstance();
     double kp = 0;
     double ki = 0;
     double kd = 0;
@@ -54,6 +57,13 @@ public class TurnPid extends LinearOpMode {
             }
 
             // #TODO: add Telem vals to FTC dahsboard.
+            TelemetryPacket packet = new TelemetryPacket();
+            packet.put("Target", Double.toString(targetHeading));
+            packet.put("Error", Double.toString((diff)));
+            packet.put("Current Value", robotOrientation.getYaw(AngleUnit.DEGREES));
+
+            dashboard.sendTelemetryPacket(packet);
+
 
 
             double currentTime = runtime.milliseconds();
