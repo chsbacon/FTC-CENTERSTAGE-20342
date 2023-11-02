@@ -14,7 +14,7 @@ public class TurnPid extends LinearOpMode {
     HMap robot = new HMap(); //hardware map object
     ElapsedTime runtime = new ElapsedTime();
     FtcDashboard dashboard = FtcDashboard.getInstance();
-    double kp = 0;
+    double kp = 1;
     double ki = 0;
     double kd = 0;
 
