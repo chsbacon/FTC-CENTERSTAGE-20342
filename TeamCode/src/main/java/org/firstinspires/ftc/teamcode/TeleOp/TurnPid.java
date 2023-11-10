@@ -50,10 +50,12 @@ public class TurnPid extends LinearOpMode {
             double targetHeading = Math.atan2(rx, ry);
 
 
-            double diff = ( targetHeading - robotOrientation.getYaw(AngleUnit.DEGREES) + 180 ) % 360 - 180;
-            if (diff < -180){
-                diff += 360; // diffrence in angles made relative if more than -180 becasue an angle over -180 will
-                            // be closer to 180 than -180
+            double diff = targetHeading - robotOrientation.getYaw(AngleUnit.DEGREES);
+
+            if (diff > 180) {
+                diff -= 360;
+            }else if (diff < -180){
+                diff += 360;
             }
 
             // #TODO: add Telem vals to FTC dahsboard.
@@ -88,10 +90,10 @@ public class TurnPid extends LinearOpMode {
             double frontRightPower = mulR * angleChange;
             double backRightPower = mulR * angleChange;
 
-            robot.LFMotor.setPower(frontLeftPower);
-            robot.LBMotor.setPower(backLeftPower);
-            robot.RFMotor.setPower(frontRightPower);
-            robot.RBMotor.setPower(backRightPower);
+//            robot.LFMotor.setPower(frontLeftPower);
+//            robot.LBMotor.setPower(backLeftPower);
+//            robot.RFMotor.setPower(frontRightPower);
+//            robot.RBMotor.setPower(backRightPower);
         }
     }
 }
