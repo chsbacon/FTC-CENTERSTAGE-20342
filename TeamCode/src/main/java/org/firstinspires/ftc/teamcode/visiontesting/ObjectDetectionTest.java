@@ -29,7 +29,6 @@
 
 package org.firstinspires.ftc.teamcode.visiontesting;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -99,6 +98,14 @@ public class ObjectDetectionTest extends LinearOpMode {
         visionPortal.close();
 
     }   // end runOpMode()
+
+    public  boolean checkForObject (String label) {
+        List<Recognition> recognitions = tfod.getRecognitions();
+        for (Recognition recognition : recognitions) {
+            if (recognition.getLabel().equals(label)) return  true;
+        }
+        return  false;
+    }
 
     /**
      * Initialize the TensorFlow Object Detection processor.
