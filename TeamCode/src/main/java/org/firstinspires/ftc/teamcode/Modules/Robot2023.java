@@ -22,12 +22,12 @@ public class Robot2023 {
 
     MecanumDrive drive;
     Telemetry telemetry;
-    WebcamName webcam;
+    //WebcamName webcam;
     public Robot2023(LinearOpMode opMode, MecanumDrive drive, boolean doDriveController,boolean doArmController, boolean doLauncherController){
         this.hardwareMap = opMode.hardwareMap;
         this.telemetry = opMode.telemetry;
         this.drive = drive;
-        this.webcam = hardwareMap.get(WebcamName.class, "Webcam1");
+        //this.webcam = hardwareMap.get(WebcamName.class, "Webcam1");
 
         if (doDriveController){
             driveController = new DriveController();
