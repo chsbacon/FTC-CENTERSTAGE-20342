@@ -8,7 +8,6 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class ArmController {
     private enum ArmState {
-
         idle,
         ReleasePositon,
     }
@@ -44,23 +43,17 @@ public class ArmController {
 
     public void doLoop(Gamepad gampad1,Gamepad gampad2){
         if (gampad2.right_trigger > 0.5){
-            claw_State = ClawState.Open;
             openClaw();
         }
         if (gampad2.left_trigger > 0.5){
-            claw_State = ClawState.Closed;
             closeClaw();
         }
         if (gampad1.dpad_up ){
-            robot.linearSlideMotor.setTargetPosition(linearSlideTicksUntilOpen);
-            arm_State = ArmState.ReleasePositon;
+            linearSlideUp();
         }
         if (gampad1.dpad_down){
-            robot.linearSlideMotor.setTargetPosition(0);
-            arm_State = ArmState.ReleasePositon;
+            linearSlideDown();
         }
-    }
-
     }
 
     public void closeClaw(){
@@ -68,13 +61,23 @@ public class ArmController {
         claw_State = ClawState.Closed;
     }
 
-    public void openClaw(){
+    public void openClaw(){ // ALSO CAN USE THESE FOR AUTO
         robot.clawServo.setPosition(CLAW_OPEN);
         claw_State = ClawState.Open;
     }
 
+    public void linearSlideUp(){
+        robot.linearSlideMotor.setTargetPosition(linearSlideTicksUntilOpen);
+        arm_State = ArmState.ReleasePositon;
+    }
 
-    public void releasePeiceAtTop() { // Not in use possible control option
+    public void linearSlideDown(){
+        robot.linearSlideMotor.setTargetPosition(0);
+        arm_State = ArmState.ReleasePositon;
+    }
+
+
+    public void releasePeiceAtTop() { // combines the action of opening the claw and moving the linear slide up possible use in auto
         if (claw_State == ClawState.Closed && arm_State == ArmState.idle) {
             robot.linearSlideMotor.setTargetPosition(linearSlideTicksUntilOpen);
             arm_State = ArmState.ReleasePositon;
