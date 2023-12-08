@@ -57,10 +57,7 @@ public class HMap
                 )
         );**/
 
-        LFMotor.setDirection(DcMotor.Direction.REVERSE);
         RFMotor.setDirection(DcMotor.Direction.REVERSE);
-        RBMotor.setDirection(DcMotor.Direction.REVERSE);
-
 
         // Set all motors to zero power
         LFMotor.setPower(0);
