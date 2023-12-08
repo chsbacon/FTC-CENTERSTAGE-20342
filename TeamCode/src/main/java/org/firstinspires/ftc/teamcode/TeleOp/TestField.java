@@ -2,14 +2,10 @@ package org.firstinspires.ftc.teamcode.TeleOp;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @TeleOp(name = "TestField", group = "TeleOp")
 public class TestField extends LinearOpMode {
@@ -61,7 +57,4 @@ public class TestField extends LinearOpMode {
             robot.RBMotor.setPower(backRightPower);
         }
     }
-
-
-
 }
