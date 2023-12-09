@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.Auto;
 
-
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -13,18 +12,15 @@ import org.firstinspires.ftc.teamcode.TeleOp.HMap;
 public class AutoBlueRight extends LinearOpMode{
     HMap robot = new HMap();
     private ElapsedTime     runtime = new ElapsedTime();
-
     static final double     COUNTS_PER_MOTOR_REV = 537.7;
     static final double     WHEEL_DIAMETER_INCHES = 96.0/25.4;
     static final double     COUNTS_PER_INCH = COUNTS_PER_MOTOR_REV / WHEEL_DIAMETER_INCHES * 3.1415;
     static final double DRIVE_SPEED = 0.3;
     static final double TURN_SPEED = 0.2;
-
-    private FieldPositions.SpikeMarkLocation spikeMarkLocation;
-
     @Override
     public void runOpMode(){
         robot.init(hardwareMap);
+        robot.tfodController.onOpmodeInit(robot, telemetry, FieldPositions.Team.Blue);
 
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Resetting Encoders");
@@ -37,31 +33,42 @@ public class AutoBlueRight extends LinearOpMode{
         telemetry.update();
 
         // Wait for the game to start (driver presses PLAY)
-        waitForStart();
+        while(!isStarted()){
+            robot.tfodController.doLoop(gamepad1, gamepad2);
+        }
 
-        //encoderDrive(DRIVE_SPEED, .5, .5);
-        //encoderDrive(TURN_SPEED, -1.75, 1.75);
+        robot.RFMotor.setDirection(DcMotor.Direction.FORWARD);
+        robot.LBMotor.setDirection(DcMotor.Direction.REVERSE);
+
+        encoderDrive(DRIVE_SPEED, .75, .75);
+
+        robot.RFMotor.setDirection(DcMotor.Direction.REVERSE);
+        robot.LBMotor.setDirection(DcMotor.Direction.FORWARD);
+
+        encoderDrive(TURN_SPEED, -1.67, 1.67);
+
 
         if(robot.tfodController != null){
             double lastX = robot.tfodController.lastX;
             // here's where the thresholds for position detection are
             // with of screen is 640, so have the windows be each third of the screen
-            /**if(lastX < 640/3){
+            if(lastX < 640/3){
                 // left spike mark
+                telemetry.addData("Left!", runtime);
                 left();
-            } else if (lastX < 640*2/3){**/
+            } else if (lastX < 640*2/3){
                 // center spike mark
+                telemetry.addData("Center!", runtime);
                 center();
-            /**} else {
+            } else {
                 // right spike mark
+                telemetry.addData("Right!", runtime);
                 right();
             }
-            telemetry.log().add("LastX is " + robot.tfodController.lastX + ", so spike mark location is " + spikeMarkLocation.toString());**/
         } else {
             // if the tfod isn't running, assume we're center spike mark
-            spikeMarkLocation = FieldPositions.SpikeMarkLocation.Center;
-            center();
             telemetry.log().add("Cound not get TFOD controller, assuming center mark");
+            center();
         }
         telemetry.update();
     }
@@ -131,32 +138,41 @@ public class AutoBlueRight extends LinearOpMode{
     }
 
     public void left() {
-        encoderDrive(DRIVE_SPEED,  3, 3);
-        encoderDrive(TURN_SPEED,  1.75, -1.75);
-        encoderDrive(DRIVE_SPEED,  .25, .25);
-        encoderDrive(DRIVE_SPEED,  -.25, -.25);
-        encoderDrive(TURN_SPEED,  -1.75, 1.75);
-        encoderDrive(DRIVE_SPEED,  -2.5, -2.5);
-        encoderDrive(TURN_SPEED,  1.75, -1.75);
-        encoderDrive(DRIVE_SPEED,  8, 8);
+        //place
+        encoderDrive(DRIVE_SPEED,  2.25, 2.25);
+        encoderDrive(TURN_SPEED,  1.67, -1.67);
+        encoderDrive(DRIVE_SPEED,  .7, .7);
+        sleep(5);
+        encoderDrive(DRIVE_SPEED,  -.9, -.9);
+        encoderDrive(TURN_SPEED,  -1.67, 1.67);
+        encoderDrive(DRIVE_SPEED,  -2.4, -2.4);
+        //park
+        encoderDrive(TURN_SPEED,  1.68, -1.68);
+        encoderDrive(DRIVE_SPEED,  9, 9);
         telemetry.addData("Left:", runtime);
     }
     public void center() {
-        encoderDrive(DRIVE_SPEED,  3,  3);
-        encoderDrive(DRIVE_SPEED,  -2.5,  -2.5);
-        encoderDrive(TURN_SPEED,  1.75, -1.75);
-        encoderDrive(DRIVE_SPEED,  8, 8);
+        //place
+        encoderDrive(DRIVE_SPEED,  2.5,  2.5);
+        sleep(5);
+        encoderDrive(DRIVE_SPEED,  -2.6,  -2.6);
+        //park
+        encoderDrive(TURN_SPEED,  1.67, -1.67);
+        encoderDrive(DRIVE_SPEED,  9, 9);
         telemetry.addData("Center:", runtime);
     }
     public void right() {
-        encoderDrive(DRIVE_SPEED,  3, 3);
-        encoderDrive(TURN_SPEED,  -1.75, 1.75);
-        encoderDrive(DRIVE_SPEED,  .25, .25);
-        encoderDrive(DRIVE_SPEED,  -.25, -.25);
-        encoderDrive(TURN_SPEED,  1.75, -1.75);
-        encoderDrive(DRIVE_SPEED,  -2.5, -2.5);
-        encoderDrive(TURN_SPEED,  1.75, -1.75);
-        encoderDrive(DRIVE_SPEED,  8, 8);
+        //place
+        encoderDrive(DRIVE_SPEED,  2.25, 2.25);
+        encoderDrive(TURN_SPEED,  -1.67, 1.67);
+        encoderDrive(DRIVE_SPEED,  .5, .5);
+        sleep(5);
+        encoderDrive(DRIVE_SPEED,  -.5, -.5);
+        encoderDrive(TURN_SPEED,  1.67, -1.67);
+        encoderDrive(DRIVE_SPEED,  -2.4, -2.4);
+        //park
+        encoderDrive(TURN_SPEED,  1.68, -1.68);
+        encoderDrive(DRIVE_SPEED,  9, 9);
         telemetry.addData("Right:", runtime);
     }
 }

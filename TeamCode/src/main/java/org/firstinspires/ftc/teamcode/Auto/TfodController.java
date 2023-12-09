@@ -10,13 +10,14 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDir
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.teamcode.Auto.FieldPositions;
 import org.firstinspires.ftc.teamcode.Auto.Robot2023;
+import org.firstinspires.ftc.teamcode.TeleOp.HMap;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
 import java.util.List;
 
 public class TfodController {
-    private Robot2023 robot;
+    private HMap robot;
     private Telemetry telemetry;
     // true if external, false if built in to android phone
     private static final boolean USE_WEBCAM = true;
@@ -35,7 +36,7 @@ public class TfodController {
 
     private VisionPortal visionPortal;
     ElapsedTime pidTimer = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
-    public void onOpmodeInit(Robot2023 robot, Telemetry telemetry, FieldPositions.Team team){
+    public void onOpmodeInit(HMap robot, Telemetry telemetry, FieldPositions.Team team){
         if (team == FieldPositions.Team.Blue){
             USED_MODEL_LOCATION = BLUE_TFOD_MODEL_ASSET;
         } else {
@@ -96,7 +97,7 @@ public class TfodController {
 
         // Set the camera (webcam vs. built-in RC phone camera).
         if (USE_WEBCAM) {
-            builder.setCamera(robot.webcam);
+            builder.setCamera(robot.Webcam1);
         } else {
             builder.setCamera(BuiltinCameraDirection.BACK);
         }
