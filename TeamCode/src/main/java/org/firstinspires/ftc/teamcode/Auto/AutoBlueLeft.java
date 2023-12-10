@@ -17,6 +17,7 @@ public class AutoBlueLeft extends LinearOpMode{
     static final double     COUNTS_PER_INCH = COUNTS_PER_MOTOR_REV / WHEEL_DIAMETER_INCHES * 3.1415;
     static final double DRIVE_SPEED = 0.3;
     static final double TURN_SPEED = 0.2;
+    static final boolean park = true;
     @Override
     public void runOpMode(){
         robot.init(hardwareMap);
@@ -69,6 +70,11 @@ public class AutoBlueLeft extends LinearOpMode{
             // if the tfod isn't running, assume we're center spike mark
             center();
             telemetry.log().add("Cound not get TFOD controller, assuming center mark");
+        }
+        //park
+        if (park) {
+            encoderDrive(TURN_SPEED,  1.67, -1.67);
+            encoderDrive(DRIVE_SPEED,  4, 4);
         }
         telemetry.update();
     }
@@ -141,24 +147,18 @@ public class AutoBlueLeft extends LinearOpMode{
         //place
         encoderDrive(DRIVE_SPEED,  2.25, 2.25);
         encoderDrive(TURN_SPEED,  1.67, -1.67);
-        encoderDrive(DRIVE_SPEED,  .7, .7);
+        encoderDrive(DRIVE_SPEED,  .6, .6);
         sleep(5);
-        encoderDrive(DRIVE_SPEED,  -.8, -.8);
+        encoderDrive(DRIVE_SPEED,  -.7, -.7);
         encoderDrive(TURN_SPEED,  -1.67, 1.67);
-        encoderDrive(DRIVE_SPEED,  -2.4, -2.4);
-        //park
-        encoderDrive(TURN_SPEED,  1.68, -1.68);
-        encoderDrive(DRIVE_SPEED,  4, 4);
+        encoderDrive(DRIVE_SPEED,  -2.35, -2.35);
         telemetry.addData("Left:", runtime);
     }
     public void center() {
         //place
         encoderDrive(DRIVE_SPEED,  2.5,  2.5);
         sleep(5);
-        encoderDrive(DRIVE_SPEED,  -2.6,  -2.6);
-        //park
-        encoderDrive(TURN_SPEED,  1.67, -1.67);
-        encoderDrive(DRIVE_SPEED,  4, 4);
+        encoderDrive(DRIVE_SPEED,  -2.5,  -2.5);
         telemetry.addData("Center:", runtime);
     }
     public void right() {
@@ -169,10 +169,7 @@ public class AutoBlueLeft extends LinearOpMode{
         sleep(5);
         encoderDrive(DRIVE_SPEED,  -.8, -.8);
         encoderDrive(TURN_SPEED,  1.67, -1.67);
-        encoderDrive(DRIVE_SPEED,  -2.4, -2.4);
-        //park
-        encoderDrive(TURN_SPEED,  1.68, -1.68);
-        encoderDrive(DRIVE_SPEED,  4, 4);
+        encoderDrive(DRIVE_SPEED,  -2.35, -2.35);
         telemetry.addData("Right:", runtime);
     }
 }

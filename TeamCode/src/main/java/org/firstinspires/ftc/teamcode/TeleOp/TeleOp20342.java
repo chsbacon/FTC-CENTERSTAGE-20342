@@ -18,9 +18,9 @@ public class TeleOp20342 extends LinearOpMode {
 
         if (isStopRequested()) return;
 
-        double launcherPwr = 0;
-
         while (opModeIsActive()){
+            double speed  = .75;
+
             robot.LFMotor.setDirection(DcMotor.Direction.REVERSE);
             robot.LBMotor.setDirection(DcMotor.Direction.REVERSE);
             robot.RFMotor.setDirection(DcMotor.Direction.FORWARD);
@@ -30,17 +30,21 @@ public class TeleOp20342 extends LinearOpMode {
             double tAngle = Math.atan2(gamepad1.left_stick_y, gamepad1.right_stick_x) - Math.PI / 4;
             double turn = -gamepad1.left_stick_x * 0.7;
 
-            double LFpwr = m * Math.cos(tAngle) + turn;
-            double LBpwr = m * Math.sin(tAngle) + turn;
-            double RFpwr = m * Math.sin(tAngle) - turn;
-            double RBpwr = m * Math.cos(tAngle) - turn;
+            double LFpwr = (m * Math.cos(tAngle) + turn) * speed;
+            double LBpwr = (m * Math.sin(tAngle) + turn) * speed;
+            double RFpwr = (m * Math.sin(tAngle) - turn) * speed;
+            double RBpwr = (m * Math.cos(tAngle) - turn) * speed;
 
             double turnScale = Math.max(Math.max(Math.abs(LFpwr), Math.abs(LBpwr)),
                     Math.max(Math.abs(RFpwr), Math.abs(RBpwr)));
             if (Math.abs(turnScale) < 1.0) turnScale = 1.0;
 
+            double launcherPos = .6;
             if (gamepad2.x) {
-                launcherPwr = 0.5;
+                launcherPos = 0;
+            }
+            else {
+                launcherPos = .6;
             }
             telemetry.addData("Launcher: ", robot.launcherServo.getPosition());
             telemetry.update();
@@ -70,7 +74,7 @@ public class TeleOp20342 extends LinearOpMode {
             robot.RBMotor.setPower(LBpwr / turnScale);
             robot.RFMotor.setPower(RFpwr / turnScale);
             robot.LBMotor.setPower(RBpwr / turnScale);
-            robot.launcherServo.setPosition(launcherPwr);
+            robot.launcherServo.setPosition(launcherPos);
             //robot.armMotor.setPower(armPwr);
             //robot.clawServo.setPosition(clawPwr);
         }

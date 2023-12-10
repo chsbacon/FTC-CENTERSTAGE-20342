@@ -17,6 +17,7 @@ public class AutoRedRight extends LinearOpMode{
     static final double     COUNTS_PER_INCH = COUNTS_PER_MOTOR_REV / WHEEL_DIAMETER_INCHES * 3.1415;
     static final double DRIVE_SPEED = 0.3;
     static final double TURN_SPEED = 0.2;
+    static final boolean park = false;
     @Override
     public void runOpMode(){
         robot.init(hardwareMap);
@@ -69,6 +70,11 @@ public class AutoRedRight extends LinearOpMode{
             // if the tfod isn't running, assume we're center spike mark
             telemetry.log().add("Cound not get TFOD controller, assuming center mark");
             center();
+        }
+        //park
+        if (park) {
+            encoderDrive(TURN_SPEED,  -1.67, 1.67);
+            encoderDrive(DRIVE_SPEED,  4, 4);
         }
         telemetry.update();
     }
@@ -170,9 +176,6 @@ public class AutoRedRight extends LinearOpMode{
         encoderDrive(DRIVE_SPEED,  -.5, -.5);
         encoderDrive(TURN_SPEED,  1.67, -1.67);
         encoderDrive(DRIVE_SPEED,  -2.4, -2.4);
-        //park
-        encoderDrive(TURN_SPEED,  -1.68, 1.68);
-        encoderDrive(DRIVE_SPEED,  4, 4);
         telemetry.addData("Right:", runtime);
     }
 }
