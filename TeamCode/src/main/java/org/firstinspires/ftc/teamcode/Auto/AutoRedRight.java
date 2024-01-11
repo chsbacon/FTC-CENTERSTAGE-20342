@@ -145,37 +145,31 @@ public class AutoRedRight extends LinearOpMode{
 
     public void left() {
         //place
-        encoderDrive(DRIVE_SPEED,  2.25, 2.25);
+        encoderDrive(DRIVE_SPEED,  -2.25, -2.25);
         encoderDrive(TURN_SPEED,  1.67, -1.67);
-        encoderDrive(DRIVE_SPEED,  .7, .7);
+        encoderDrive(DRIVE_SPEED,  -.6, -.6);
         sleep(5);
-        encoderDrive(DRIVE_SPEED,  -.9, -.9);
+        encoderDrive(DRIVE_SPEED,  .7, .7);
         encoderDrive(TURN_SPEED,  -1.67, 1.67);
-        encoderDrive(DRIVE_SPEED,  -2.4, -2.4);
-        //park
-        encoderDrive(TURN_SPEED,  -1.68, 1.68);
-        encoderDrive(DRIVE_SPEED,  4, 4);
+        encoderDrive(DRIVE_SPEED,  2.35, 2.35);
         telemetry.addData("Left:", runtime);
     }
     public void center() {
         //place
-        encoderDrive(DRIVE_SPEED,  2.5,  2.5);
+        encoderDrive(DRIVE_SPEED,  -2.5,  -2.5);
         sleep(5);
-        encoderDrive(DRIVE_SPEED,  -2.6,  -2.6);
-        //park
-        encoderDrive(TURN_SPEED,  -1.67, 1.67);
-        encoderDrive(DRIVE_SPEED,  4, 4);
+        encoderDrive(DRIVE_SPEED,  2.5,  2.5);
         telemetry.addData("Center:", runtime);
     }
     public void right() {
         //place
-        encoderDrive(DRIVE_SPEED,  2.25, 2.25);
+        encoderDrive(DRIVE_SPEED,  -2.25, -2.25);
         encoderDrive(TURN_SPEED,  -1.67, 1.67);
-        encoderDrive(DRIVE_SPEED,  .5, .5);
+        encoderDrive(DRIVE_SPEED,  -.6, -.6);
         sleep(5);
-        encoderDrive(DRIVE_SPEED,  -.5, -.5);
+        encoderDrive(DRIVE_SPEED,  .8, .8);
         encoderDrive(TURN_SPEED,  1.67, -1.67);
-        encoderDrive(DRIVE_SPEED,  -2.4, -2.4);
+        encoderDrive(DRIVE_SPEED,  2.35, 2.35);
         telemetry.addData("Right:", runtime);
     }
 }
