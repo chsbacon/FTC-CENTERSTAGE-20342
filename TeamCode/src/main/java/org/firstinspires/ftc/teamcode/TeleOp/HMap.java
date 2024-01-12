@@ -42,8 +42,8 @@ public class HMap
         RFMotor = hwMap.get(DcMotor.class, "rightFront");
         LBMotor = hwMap.get(DcMotor.class, "leftBack");
         RBMotor = hwMap.get(DcMotor.class, "rightBack");
-        //armMotor = hwMap.get(DcMotor.class, "arm");
-        //clawServo = hwMap.get(Servo.class, "claw");
+        armMotor = hwMap.get(DcMotor.class, "arm");
+        clawServo = hwMap.get(Servo.class, "claw");
         launcherServo = hwMap.get(Servo.class, "launcher");
         imu = hwMap.get(IMU.class, "imu");
         Webcam1 = hwMap.get(WebcamName.class, "Webcam 1");
@@ -70,7 +70,7 @@ public class HMap
         RFMotor.setPower(0);
         LBMotor.setPower(0);
         RBMotor.setPower(0);
-        //armMotor.setPower(0);
+        armMotor.setPower(0);
 
         LFMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         RFMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -82,13 +82,13 @@ public class HMap
         RFMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         LBMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         RBMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        //armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Set zero power behavior
         LFMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         LBMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         RFMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         RBMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        //armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 }

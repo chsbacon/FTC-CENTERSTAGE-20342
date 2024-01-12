@@ -49,25 +49,21 @@ public class TeleOp20342 extends LinearOpMode {
             telemetry.addData("Launcher: ", robot.launcherServo.getPosition());
             telemetry.update();
 
-            /**double armPwr = 0;
-            if (gamepad1.right_trigger > 0.75) {
-                  armPwr = .5;
+            if (gamepad2.right_trigger > 0.75) {
+                robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                robot.armMotor.setPower(.5);
             }
-            else if (gamepad1.left_trigger > 0.75) {
-                armPwr = -.5;
-            }
-            else {
-                armPwr = 0;
+            else if (gamepad2.left_trigger > 0.75) {
+                robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                robot.armMotor.setPower(-.5);
             }
 
-             double clawPwr = 0;
-             if (gamepad1.y) {
-             clawPwr = 1;
-             telemetry.addData("Claw: ", clawPwr);
+             if (gamepad2.a) {
+                robot.clawServo.setPosition(0);
              }
-             else {
-             clawPwr = 0;
-             }**/
+             if (gamepad2.b) {
+                 robot.clawServo.setPosition(1);
+             }
 
             // set the motors
             robot.LFMotor.setPower(LFpwr / turnScale);
