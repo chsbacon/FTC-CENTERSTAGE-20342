@@ -48,14 +48,12 @@ public class TeleOp20342 extends LinearOpMode {
             telemetry.addData("Launcher: ", robot.launcherServo.getPosition());
             telemetry.update();
 
-            if (gamepad2.right_trigger > 0.75) {
-                robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                robot.armMotor.setPower(.5);
+            /**while (gamepad2.right_trigger > 0.75) {
+                robot.armMotor.setPower(.1);
             }
-            else if (gamepad2.left_trigger > 0.75) {
-                robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                robot.armMotor.setPower(-.5);
-            }
+            while (gamepad2.left_trigger > 0.75) {
+                robot.armMotor.setPower(-.1);
+            }**/
 
             if (gamepad2.a) {
                 robot.clawServo.setPosition(0);
@@ -69,7 +67,6 @@ public class TeleOp20342 extends LinearOpMode {
             robot.RBMotor.setPower(LBpwr / turnScale);
             robot.RFMotor.setPower(RFpwr / turnScale);
             robot.LBMotor.setPower(RBpwr / turnScale);
-            robot.launcherServo.setPosition(launcherPos);
         }
     }
 

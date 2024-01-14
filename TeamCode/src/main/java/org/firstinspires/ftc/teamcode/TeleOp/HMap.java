@@ -16,7 +16,6 @@ public class HMap
     public DcMotor  RFMotor = null;
     public DcMotor  LBMotor = null;
     public DcMotor  RBMotor = null;
-    public DcMotor  armMotor = null;
     public Servo clawServo = null;
     public Servo launcherServo = null;
     public IMU imu = null;
@@ -38,7 +37,6 @@ public class HMap
         RFMotor = hwMap.get(DcMotor.class, "rightFront");
         LBMotor = hwMap.get(DcMotor.class, "leftBack");
         RBMotor = hwMap.get(DcMotor.class, "rightBack");
-        armMotor = hwMap.get(DcMotor.class, "arm");
         clawServo = hwMap.get(Servo.class, "claw");
         launcherServo = hwMap.get(Servo.class, "launcher");
         Webcam1 = hwMap.get(WebcamName.class, "Webcam 1");
@@ -47,33 +45,29 @@ public class HMap
         LBMotor.setDirection(DcMotor.Direction.FORWARD);
         RFMotor.setDirection(DcMotor.Direction.REVERSE);
         RBMotor.setDirection(DcMotor.Direction.FORWARD);
-        armMotor.setDirection(DcMotor.Direction.FORWARD);
 
         // Set all motors to zero power
         LFMotor.setPower(0);
         RFMotor.setPower(0);
         LBMotor.setPower(0);
         RBMotor.setPower(0);
-        armMotor.setPower(0);
+        clawServo.setPosition(1);
 
         LFMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         RFMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         LBMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         RBMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         // Set motors to run with encoders.
         LFMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         RFMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         LBMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         RBMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Set zero power behavior
         LFMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         LBMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         RFMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         RBMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 }

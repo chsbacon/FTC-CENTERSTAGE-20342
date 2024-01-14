@@ -7,9 +7,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.TeleOp.HMap;
 
-@Autonomous(name = "AutoRedLeft", group = "TeleOp")
+@Autonomous(name = "PointTestBlue", group = "TeleOp")
 
-public class AutoRedLeft extends LinearOpMode{
+public class PointTestBlue extends LinearOpMode{
     HMap robot = new HMap();
     private ElapsedTime     runtime = new ElapsedTime();
     static final double     COUNTS_PER_MOTOR_REV = 537.7;
@@ -21,7 +21,7 @@ public class AutoRedLeft extends LinearOpMode{
     @Override
     public void runOpMode(){
         robot.init(hardwareMap);
-        robot.tfodController.onOpmodeInit(robot, telemetry, FieldPositions.Team.Red);
+        robot.tfodController.onOpmodeInit(robot, telemetry, FieldPositions.Team.Blue);
 
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Resetting Encoders");
@@ -48,6 +48,7 @@ public class AutoRedLeft extends LinearOpMode{
 
         encoderDrive(TURN_SPEED, 1.67, -1.67);
 
+
         if(robot.tfodController != null){
             double lastX = robot.tfodController.lastX;
             // here's where the thresholds for position detection are
@@ -72,8 +73,9 @@ public class AutoRedLeft extends LinearOpMode{
         }
         //park
         if (park) {
-            encoderDrive(TURN_SPEED, -1.67, 1.67);
-            encoderDrive(DRIVE_SPEED, 9, 9);
+            encoderDrive(TURN_SPEED,  1.67, -1.67);
+            encoderDrive(DRIVE_SPEED,  -3.8, -3.8);
+            robot.clawServo.setPosition(0);
         }
         telemetry.update();
     }
@@ -150,14 +152,14 @@ public class AutoRedLeft extends LinearOpMode{
         sleep(5);
         encoderDrive(DRIVE_SPEED,  .7, .7);
         encoderDrive(TURN_SPEED,  -1.67, 1.67);
-        encoderDrive(DRIVE_SPEED,  2.35, 2.35);
+        encoderDrive(DRIVE_SPEED,  1, 1);
         telemetry.addData("Left:", runtime);
     }
     public void center() {
         //place
         encoderDrive(DRIVE_SPEED,  -2.5,  -2.5);
         sleep(5);
-        encoderDrive(DRIVE_SPEED,  2.5,  2.5);
+        encoderDrive(DRIVE_SPEED,  .5,  .5);
         telemetry.addData("Center:", runtime);
     }
     public void right() {
@@ -168,7 +170,6 @@ public class AutoRedLeft extends LinearOpMode{
         sleep(5);
         encoderDrive(DRIVE_SPEED,  .8, .8);
         encoderDrive(TURN_SPEED,  1.67, -1.67);
-        encoderDrive(DRIVE_SPEED,  2.35, 2.35);
         telemetry.addData("Right:", runtime);
     }
 }
