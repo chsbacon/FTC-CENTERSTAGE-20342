@@ -67,6 +67,7 @@ public class TeleOp20342 extends LinearOpMode {
             robot.RBMotor.setPower(LBpwr / turnScale);
             robot.RFMotor.setPower(RFpwr / turnScale);
             robot.LBMotor.setPower(RBpwr / turnScale);
+            robot.launcherServo.setPosition(launcherPos);
         }
     }
 

@@ -17,7 +17,7 @@ public class AutoBlueLeft extends LinearOpMode{
     static final double     COUNTS_PER_INCH = COUNTS_PER_MOTOR_REV / WHEEL_DIAMETER_INCHES * 3.1415;
     static final double DRIVE_SPEED = 0.3;
     static final double TURN_SPEED = 0.2;
-    static final boolean park = true;
+    static final boolean park = false;
     @Override
     public void runOpMode(){
         robot.init(hardwareMap);
@@ -165,9 +165,9 @@ public class AutoBlueLeft extends LinearOpMode{
         //place
         encoderDrive(DRIVE_SPEED,  -2.25, -2.25);
         encoderDrive(TURN_SPEED,  -1.67, 1.67);
-        encoderDrive(DRIVE_SPEED,  -.6, -.6);
+        encoderDrive(DRIVE_SPEED,  -.4, -.4);
         sleep(5);
-        encoderDrive(DRIVE_SPEED,  .8, .8);
+        encoderDrive(DRIVE_SPEED,  .2, .2);
         encoderDrive(TURN_SPEED,  1.67, -1.67);
         encoderDrive(DRIVE_SPEED,  2.35, 2.35);
         telemetry.addData("Right:", runtime);

@@ -74,7 +74,7 @@ public class AutoRedRight extends LinearOpMode{
         //park
         if (park) {
             encoderDrive(TURN_SPEED,  -1.67, 1.67);
-            encoderDrive(DRIVE_SPEED,  4, 4);
+            encoderDrive(DRIVE_SPEED,  -4, -4);
         }
         telemetry.update();
     }
@@ -147,7 +147,7 @@ public class AutoRedRight extends LinearOpMode{
         //place
         encoderDrive(DRIVE_SPEED,  -2.25, -2.25);
         encoderDrive(TURN_SPEED,  1.67, -1.67);
-        encoderDrive(DRIVE_SPEED,  -.6, -.6);
+        encoderDrive(DRIVE_SPEED,  -.2, -.2);
         sleep(5);
         encoderDrive(DRIVE_SPEED,  .7, .7);
         encoderDrive(TURN_SPEED,  -1.67, 1.67);
@@ -165,9 +165,9 @@ public class AutoRedRight extends LinearOpMode{
         //place
         encoderDrive(DRIVE_SPEED,  -2.25, -2.25);
         encoderDrive(TURN_SPEED,  -1.67, 1.67);
-        encoderDrive(DRIVE_SPEED,  -.6, -.6);
+        encoderDrive(DRIVE_SPEED,  -.5, -.5);
         sleep(5);
-        encoderDrive(DRIVE_SPEED,  .8, .8);
+        encoderDrive(DRIVE_SPEED,  .6, .6);
         encoderDrive(TURN_SPEED,  1.67, -1.67);
         encoderDrive(DRIVE_SPEED,  2.35, 2.35);
         telemetry.addData("Right:", runtime);

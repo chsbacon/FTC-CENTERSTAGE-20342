@@ -51,7 +51,7 @@ public class HMap
         RFMotor.setPower(0);
         LBMotor.setPower(0);
         RBMotor.setPower(0);
-        clawServo.setPosition(1);
+        clawServo.setPosition(0);
 
         LFMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         RFMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

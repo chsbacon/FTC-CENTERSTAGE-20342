@@ -73,7 +73,7 @@ public class AutoRedLeft extends LinearOpMode{
         //park
         if (park) {
             encoderDrive(TURN_SPEED, -1.67, 1.67);
-            encoderDrive(DRIVE_SPEED, 9, 9);
+            encoderDrive(DRIVE_SPEED, -9, -9);
         }
         telemetry.update();
     }
