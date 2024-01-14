@@ -5,7 +5,6 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-
 @TeleOp(name = "TeleOp20342", group = "TeleOp")
 public class TeleOp20342 extends LinearOpMode {
     HMap robot = new HMap(); //hardware map object
@@ -39,7 +38,7 @@ public class TeleOp20342 extends LinearOpMode {
                     Math.max(Math.abs(RFpwr), Math.abs(RBpwr)));
             if (Math.abs(turnScale) < 1.0) turnScale = 1.0;
 
-            double launcherPos = .6;
+            double launcherPos;
             if (gamepad2.x) {
                 launcherPos = 0;
             }
@@ -58,12 +57,12 @@ public class TeleOp20342 extends LinearOpMode {
                 robot.armMotor.setPower(-.5);
             }
 
-             if (gamepad2.a) {
+            if (gamepad2.a) {
                 robot.clawServo.setPosition(0);
-             }
-             if (gamepad2.b) {
-                 robot.clawServo.setPosition(1);
-             }
+            }
+            if (gamepad2.b) {
+                robot.clawServo.setPosition(1);
+            }
 
             // set the motors
             robot.LFMotor.setPower(LFpwr / turnScale);
@@ -71,8 +70,6 @@ public class TeleOp20342 extends LinearOpMode {
             robot.RFMotor.setPower(RFpwr / turnScale);
             robot.LBMotor.setPower(RBpwr / turnScale);
             robot.launcherServo.setPosition(launcherPos);
-            //robot.armMotor.setPower(armPwr);
-            //robot.clawServo.setPosition(clawPwr);
         }
     }
 

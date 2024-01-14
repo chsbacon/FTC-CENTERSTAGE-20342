@@ -10,7 +10,6 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.Auto.TfodController;
 import org.openftc.easyopencv.OpenCvCamera;
 
-
 public class HMap
 {
     public DcMotor  LFMotor = null;
@@ -22,11 +21,8 @@ public class HMap
     public Servo launcherServo = null;
     public IMU imu = null;
     public WebcamName Webcam1 = null;
-
     public TfodController tfodController = new TfodController();
-
     HardwareMap hwMap = null;
-    private ElapsedTime period  = new ElapsedTime();
 
     /* Constructor */
     public HMap(){
@@ -45,25 +41,13 @@ public class HMap
         armMotor = hwMap.get(DcMotor.class, "arm");
         clawServo = hwMap.get(Servo.class, "claw");
         launcherServo = hwMap.get(Servo.class, "launcher");
-        imu = hwMap.get(IMU.class, "imu");
         Webcam1 = hwMap.get(WebcamName.class, "Webcam 1");
-
-        /**IMU.Parameters myIMUparameters;
-
-        myIMUparameters = new IMU.Parameters(
-                new RevHubOrientationOnRobot(
-                        RevHubOrientationOnRobot.LogoFacingDirection.RIGHT,
-                        RevHubOrientationOnRobot.UsbFacingDirection.UP // depends on install
-                        // https://ftc-docs.firstinspires.org/en/latest/programming_resources/imu/imu.html
-                        // Link to direction guide.
-                )
-        );**/
 
         LFMotor.setDirection(DcMotor.Direction.FORWARD);
         LBMotor.setDirection(DcMotor.Direction.FORWARD);
         RFMotor.setDirection(DcMotor.Direction.REVERSE);
         RBMotor.setDirection(DcMotor.Direction.FORWARD);
-
+        armMotor.setDirection(DcMotor.Direction.FORWARD);
 
         // Set all motors to zero power
         LFMotor.setPower(0);
@@ -76,6 +60,7 @@ public class HMap
         RFMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         LBMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         RBMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         // Set motors to run with encoders.
         LFMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
