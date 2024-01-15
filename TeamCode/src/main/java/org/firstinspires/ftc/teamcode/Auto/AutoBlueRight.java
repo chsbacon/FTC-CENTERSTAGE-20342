@@ -147,7 +147,7 @@ public class AutoBlueRight extends LinearOpMode{
         //place
         encoderDrive(DRIVE_SPEED,  -2.25, -2.25);
         encoderDrive(TURN_SPEED,  1.67, -1.67);
-        encoderDrive(DRIVE_SPEED,  -.2, -.2);
+        encoderDrive(DRIVE_SPEED,  -.5, -.5);
         sleep(5);
         encoderDrive(DRIVE_SPEED,  .5, .5);
         encoderDrive(TURN_SPEED,  -1.67, 1.67);

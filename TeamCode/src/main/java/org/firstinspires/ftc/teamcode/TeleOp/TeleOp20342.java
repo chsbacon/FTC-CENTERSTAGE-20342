@@ -13,17 +13,18 @@ public class TeleOp20342 extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         robot.init(hardwareMap);
 
+        robot.LFMotor.setPower(0);
+        robot.RFMotor.setPower(0);
+        robot.LBMotor.setPower(0);
+        robot.RBMotor.setPower(0);
+        robot.clawServo.setPosition(0);
+
         waitForStart();
 
         if (isStopRequested()) return;
 
         while (opModeIsActive()){
-            double speed  = .75;
-
-            robot.LFMotor.setDirection(DcMotor.Direction.REVERSE);
-            robot.LBMotor.setDirection(DcMotor.Direction.REVERSE);
-            robot.RFMotor.setDirection(DcMotor.Direction.FORWARD);
-            robot.RBMotor.setDirection(DcMotor.Direction.REVERSE);
+            double speed  = .5;
 
             double m = Math.hypot(gamepad1.right_stick_x, gamepad1.left_stick_y);
             double tAngle = Math.atan2(gamepad1.left_stick_y, gamepad1.right_stick_x) - Math.PI / 4;

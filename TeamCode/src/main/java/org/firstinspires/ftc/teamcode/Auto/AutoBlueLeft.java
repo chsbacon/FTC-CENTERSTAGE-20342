@@ -17,7 +17,7 @@ public class AutoBlueLeft extends LinearOpMode{
     static final double     COUNTS_PER_INCH = COUNTS_PER_MOTOR_REV / WHEEL_DIAMETER_INCHES * 3.1415;
     static final double DRIVE_SPEED = 0.3;
     static final double TURN_SPEED = 0.2;
-    static final boolean park = false;
+    static final boolean park = true;
     @Override
     public void runOpMode(){
         robot.init(hardwareMap);

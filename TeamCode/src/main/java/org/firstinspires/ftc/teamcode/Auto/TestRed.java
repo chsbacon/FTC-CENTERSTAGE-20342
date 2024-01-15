@@ -7,9 +7,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.TeleOp.HMap;
 
-@Autonomous(name = "TestRedLeft", group = "TeleOp")
+@Autonomous(name = "TestRed", group = "TeleOp")
 
-public class TestRedLeft extends LinearOpMode{
+public class TestRed extends LinearOpMode{
     HMap robot = new HMap();
     private ElapsedTime     runtime = new ElapsedTime();
     static final double     COUNTS_PER_MOTOR_REV = 537.7;
@@ -21,7 +21,7 @@ public class TestRedLeft extends LinearOpMode{
     @Override
     public void runOpMode(){
         robot.init(hardwareMap);
-        robot.tfodController.onOpmodeInit(robot, telemetry, FieldPositions.Team.Blue);
+        robot.tfodController.onOpmodeInit(robot, telemetry, FieldPositions.Team.Red);
 
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Resetting Encoders");
@@ -73,8 +73,8 @@ public class TestRedLeft extends LinearOpMode{
         }
         //park
         if (park) {
-            encoderDrive(TURN_SPEED,  -1.67, 1.67);
-            encoderDrive(DRIVE_SPEED,  3.9, 3.9);
+            encoderDrive(TURN_SPEED,  1.67, -1.67);
+            encoderDrive(DRIVE_SPEED,  4.2, 4.2);
             robot.clawServo.setPosition(1);
         }
         telemetry.update();
@@ -148,10 +148,11 @@ public class TestRedLeft extends LinearOpMode{
         //place
         encoderDrive(DRIVE_SPEED,  -2.25, -2.25);
         encoderDrive(TURN_SPEED,  1.67, -1.67);
-        encoderDrive(DRIVE_SPEED,  -.2, -.2);
+        encoderDrive(DRIVE_SPEED,  -.3, -.3);
         sleep(5);
         encoderDrive(DRIVE_SPEED,  .7, .7);
         encoderDrive(TURN_SPEED,  -1.67, 1.67);
+        encoderDrive(DRIVE_SPEED, -.5, -.5);
         telemetry.addData("Left:", runtime);
     }
     public void center() {
